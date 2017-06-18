@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang='eng'>
+	<head> 
+	<meta charset="utf-8" />
+	<title>Tetris</Title>
+	
+	<script id="vertex-shader" type="x-shader/x-vertex">
+
+            precision mediump float;
+            attribute vec4 a_Position;
+            uniform mat3 u_modelView;
+            
+            void main()
+                {   
+                mat4 modelView = mat4 (
+                        u_modelView[0][0], u_modelView[0][1], 0.0, u_modelView[0][2],
+                        u_modelView[1][0], u_modelView[1][1], 0.0, u_modelView[1][2],
+                               0.0,             0.0,          1.0,   0.0,
+                        u_modelView[2][0], u_modelView[2][1], 0.0, u_modelView[2][2]                        
+                        );
+                gl_Position = modelView * a_Position;                 
+                } 
+        </script>
+
+        <script id="fragment-shader" type="x-shader/x-fragment">
+
+            precision mediump float;
+            uniform vec4 u_FragColor;
+            
+            void main()
+                {
+                gl_FragColor = u_FragColor;                
+                }
+        </script>     
+		
+		</head>
+		
+		<body onload="main()">
+        <!-- create canvas -->
+        <h1 id = "App_Title">Tetris</h1>
+        
+        <div style="float:left">
+            <canvas id="webgl" width="300" height="600">
+                Please use a browser that supports "canvas"
+            </canvas>
+            
+
+        </div>
+        <!-- load JS scripts -->
+        <script src="../lib/webgl-utils.js"></script>
+        <script src="../lib/webgl-debug.js"></script>
+        <script src="../lib/cuon-utils.js"></script>
+        <script src="../lib/uncc_webgl_utils/uncc_webgl_utils.js"></script>
+        <script src="tetrisMain.js"></script>
+		<script src ="intro.js"></script>
+		<script src ="shaders.js"></script>
+		<script src= "Shapes.js"></script>
+       
+		
+    </body>
+</html>
