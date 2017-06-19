@@ -612,8 +612,8 @@ mat.prototype.mult = function(m_t){
 	for(r = 0; r<=2; r++){
 		for(c= 0; c<=2;c++){
 			
-			matrix[c*3+r] = m_t.get(r,0)*this.get(0,c) + m_t.get(r,1)*this.get(1,c) + 
-						m_t.get(r,2)*this.get(2,c);
+			matrix[c*3+r] = this.get(r,0)*m_t.get(0,c) + this.get(r,1)*m_t.get(1,c) + 
+						this.get(r,2)*m_t.get(2,c);
 			
 		}			
 	}
@@ -657,8 +657,8 @@ mat.prototype.rotate = function(angle){
 		var sin = Math.sin(radian);
 		console.log(cos+ ": " + sin);
 		var m_r = new mat([
-		cos, sin, 0.0,
-		-sin, cos, 0.0,
+		cos, -sin, 0.0,
+		sin, cos, 0.0,
 		0.0, 0.0, 1.0]);
 		
 		this.mult(m_r);
