@@ -74,7 +74,7 @@ function tetris(gl, canvas, shader){
 		
 		}
 		lasttimestamp = timestamp;
-		console.log(lasttimestamp);
+		
 		gl.clear(gl.COLOR_BUFFER_BIT);
 		activeShape.render();
 		requestAnimationFrame(repaint);

@@ -47,7 +47,7 @@ Shape.prototype.render = function(){
 	//
 	if (this.vertices.length) 
     {	                
-			console.log("test on src offest bug: "+ this.matrix.arr());
+			
 		gl.uniformMatrix3fv(this.u_modelView, false, flatten(this.matrix.arr() ));  
 		
         // bind the vertex buffer to the GL ARRAY_BUFFER 
@@ -617,7 +617,7 @@ mat.prototype.mult = function(m_t){
 			
 		}			
 	}
-	
+	//console.log(matrix + ":   the array");
 		this.array = matrix;
 	}
 else 
@@ -652,10 +652,10 @@ mat.prototype.translate = function(translate){
 mat.prototype.rotate = function(angle){
 
 	if(!Number.isNaN(angle)){
-		var radian = Math.PI * angle;
+		var radian = (Math.PI * angle)/180;
 		var cos = Math.cos(radian);
 		var sin = Math.sin(radian);
-		
+		console.log(cos+ ": " + sin);
 		var m_r = new mat([
 		cos, sin, 0.0,
 		-sin, cos, 0.0,
