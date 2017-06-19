@@ -8,6 +8,12 @@ canvas.addEventListener(
                 handleMouseDown(ev, gl, canvas);
                 });
 
+canvas.addEventListener(
+			"keydown",
+			function(ev) {
+					handleKey(ev, gl, canvas);
+			
+});
 	
 	
 	
@@ -55,6 +61,45 @@ function handleMouseDown(ev, gl, canvas) {
 	
 	}
 };
+
+function handleKey(ev, gl, canvas){
+	console.log(ev.keyCode);
+//65 = a
+//83 = s
+//68= d
+//81 = q
+//69 = e
+var key = ev.keyCode;
+	switch(key){
+			case 65: //initiate shift rigth on active object
+						console.log("shift left");
+						activeShape.transLeft();
+						break;
+			case 68: //initiate shift left on active object
+						console.log("shift rigth");
+						activeShape.transRight();
+						break;
+			case 83: //initiate shift down on active object	
+						console.log("shift down");
+						activeShape.transDown();
+						break;
+			case 87: //initate shift up on active object
+						console.log("shift up");
+						activeShape.transUp();
+			case 81: //initiate rotate right on active oibject
+						console.loge("rotate right");
+						break;
+			case 69: //iniate roate left on active object
+						console.log("rotate left");
+						break;
+			default: console.log("don nothing");
+	
+	
+	
+	
+	}
+	
+	};
 
 	
 }

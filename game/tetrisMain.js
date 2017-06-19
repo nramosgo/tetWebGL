@@ -1,11 +1,12 @@
 //global Variables (until i can find some where else to put them)
 
 var leave = false;
-var lasttimestamp;
+var lasttimestamp = null;
 var glo, canvaso, shadero;
 var sizex, sizey;
 var spacex, spacey;
 var interval;
+var activeShape;
 
 var gameboard;
 function main(){
@@ -36,9 +37,9 @@ function main(){
     // Clear <canvas>
     gl.clear(gl.COLOR_BUFFER_BIT);
 	sizex = 0.049;
-	spacex = 0.05;
+	spacex = 0.1;
 		sizey = 0.0245;
-		spacey = 0.025;
+		spacey = 0.05;
 	//goes to intro page
 	Intro(gl,canvas, shader);
 		
@@ -51,20 +52,36 @@ function main(){
 
 
 function tetris(gl, canvas, shader){
-	console.log("begin game");
+	
 	//but for know just test things
 	
 	
-		var testSquare = new squareT(gl, shader, canvas);
+		var testSquare = new upsideT(gl, shader, canvas);
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	 var testmat = new mat();
 	 var rt = testmat.clone();
 	 console.log(rt);
 	
 	testSquare.render();
-	
+	activeShape = testSquare;
+	//var delta
 	
 	//create the fisrt tetris object
+	repaint = function(timestamp){
+		if(lasttimestamp !== null){
+		
+		
+		
+		}
+		lasttimestamp = timestamp;
+		console.log(lasttimestamp);
+		gl.clear(gl.COLOR_BUFFER_BIT);
+		activeShape.render();
+		requestAnimationFrame(repaint);
+	};
+	
+	requestAnimationFrame(repaint);
+	
 	
 	
 }

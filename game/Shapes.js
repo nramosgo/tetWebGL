@@ -177,9 +177,62 @@ block.prototype.clonematrix = function(){
 // actual tetries shape
 /**
 * This while be the 2x2 blocks
-* 
+* X,X
+* X,X
 */
 var squareT = function(gl, shader, canvas){
+	//the origin will be the top right block
+	this.origin = new block(gl, shader, canvas);
+	this.origin.shape.color = [ 1, 1, 0.0,1.0];
+	//set the pieces relative to origin
+	this.omatrix = this.origin.clonematrix() ;
+		
+	//1x2 block
+	this.rightop = new block(gl, shader, canvas);
+	this.rightop.shape.color = [ 1, 1, 0.0,1.0];	
+	
+	
+		
+	//2x1 block
+	this.botLeft = new block(gl, shader, canvas);
+	this.botLeft.shape.color = [ 1, 1, 0.0,1.0];
+	//2x2 block
+	this.botRight = new block(gl, shader, canvas);
+	this.botRight.shape.color = [ 1, 1, 0.0,1.0];
+	
+};
+
+squareT.prototype.render = function(){
+	//go thorugh and render the aligned pieces	
+	var onebytwo = this.omatrix.clone();	
+	onebytwo.translate([spacex,0]);
+	this.rightop.shape.matrix = onebytwo;
+	
+	var twobyone = this.omatrix.clone();
+	twobyone.translate([0,-spacey]);
+	this.botLeft.shape.matrix = twobyone;
+	
+	var twobytwo = this.omatrix.clone();
+	twobytwo.translate([spacex,-spacey]);
+	this.botRight.shape.matrix = twobytwo;
+	
+	//this is the final step
+	this.origin.shape.updateBuffers();
+	this.rightop.shape.updateBuffers();
+	this.botLeft.shape.updateBuffers();
+	this.botRight.shape.updateBuffers();
+	
+	this.origin.render();
+	this.rightop.render();
+	this.botLeft.render();
+	this.botRight.render();
+}
+/**
+* This is the left z shape
+*
+*/
+
+var leftZ = function(gl, shader, canvas){
 	//the origin will be the top right block
 	this.origin = new block(gl, shader, canvas);
 	//set the pieces relative to origin
@@ -187,25 +240,321 @@ var squareT = function(gl, shader, canvas){
 		
 	//1x2 block
 	this.rightop = new block(gl, shader, canvas);
-	var tempMat = this.omatrix.clone();
 	
-	tempMat.translate([.1,.1]);
 	
-	this.rightop.shape.matrix = tempMat;
-	console.log(tempMat.array);
-	//this.rightop.shape.matrix = this.origin.translate([spacex,spacey]); fix this so that 
-	// can translate things reltive to the origin this wont work currenlty
+	
+		
+	//2x1 block
+	this.botLeft = new block(gl, shader, canvas);
+	
+	//2x2 block
+	this.botMid = new block(gl, shader, canvas);
+	
+	
 };
 
-squareT.prototype.render = function(){
+leftZ.prototype.render = function(){
+	//go thorugh and render the aligned pieces	
+	var onebytwo = this.omatrix.clone();	
+	onebytwo.translate([spacex,0]);
+	this.rightop.shape.matrix = onebytwo;
+	
+	var twobyone = this.omatrix.clone();
+	twobyone.translate([0,-spacey]);
+	this.botLeft.shape.matrix = twobyone;
+	
+	var twobytwo = this.omatrix.clone();
+	twobytwo.translate([-spacex,-spacey]);
+	this.botMid.shape.matrix = twobytwo;
+	
+	//this is the final step
 	this.origin.shape.updateBuffers();
 	this.rightop.shape.updateBuffers();
+	this.botLeft.shape.updateBuffers();
+	this.botMid.shape.updateBuffers();
 	
 	this.origin.render();
 	this.rightop.render();
+	this.botLeft.render();
+	this.botMid.render();
+}
+/**
+* This the rightZ
+*
+*
+*/
+var rightZ = function(gl, shader, canvas){
+	//the origin will be the top right block
+	this.origin = new block(gl, shader, canvas);
+	this.origin.shape.color = [ 0.0, 1, 0.0,1.0];
+	//set the pieces relative to origin
+	this.omatrix = this.origin.clonematrix() ;
+		
+	//1x2 block
+	this.rightop = new block(gl, shader, canvas);
+	this.rightop.shape.color = [ 0.0, 1, 0.0,1.0];	
+	
+	
+		
+	//2x1 block
+	this.botLeft = new block(gl, shader, canvas);
+	this.botLeft.shape.color = [ 0.0, 1, 0.0,1.0];
+	//2x2 block
+	this.botRight = new block(gl, shader, canvas);
+	this.botRight.shape.color = [ 0.0, 1, 0.0,1.0];
+	
+};
+
+rightZ.prototype.render = function(){
+	//go thorugh and render the aligned pieces	
+	var onebytwo = this.omatrix.clone();	
+	onebytwo.translate([-spacex,0]);
+	this.rightop.shape.matrix = onebytwo;
+	
+	var twobyone = this.omatrix.clone();
+	twobyone.translate([0,-spacey]);
+	this.botLeft.shape.matrix = twobyone;
+	
+	var twobytwo = this.omatrix.clone();
+	twobytwo.translate([spacex,-spacey]);
+	this.botRight.shape.matrix = twobytwo;
+	
+	//this is the final step
+	this.origin.shape.updateBuffers();
+	this.rightop.shape.updateBuffers();
+	this.botLeft.shape.updateBuffers();
+	this.botRight.shape.updateBuffers();
+	
+	this.origin.render();
+	this.rightop.render();
+	this.botLeft.render();
+	this.botRight.render();
+};
+
+/**
+* Line piece
+*/
+var line = function(gl, shader, canvas){
+	//the origin will be the top right block
+	this.origin = new block(gl, shader, canvas);
+	this.origin.shape.color = [ 0, .5, 1, 1.0];
+	//set the pieces relative to origin
+	this.omatrix = this.origin.clonematrix() ;
+		
+	//1x2 block
+	this.rightop = new block(gl, shader, canvas);
+	this.rightop.shape.color = [ 0.0, .5, 1, 1.0];	
+	
+	
+		
+	//2x1 block
+	this.botLeft = new block(gl, shader, canvas);
+	this.botLeft.shape.color = [ 0, .5, 1, 1.0];
+	//2x2 block
+	this.botRight = new block(gl, shader, canvas);
+	this.botRight.shape.color = [ 0, .5, 1,1.0];
+	
+};
+
+line.prototype.render = function(){
+	//go thorugh and render the aligned pieces	
+	var onebytwo = this.omatrix.clone();	
+	onebytwo.translate([spacex,0]);
+	this.rightop.shape.matrix = onebytwo;
+	
+	var twobyone = this.omatrix.clone();
+	twobyone.translate([2*spacex,0]);
+	this.botLeft.shape.matrix = twobyone;
+	
+	var twobytwo = this.omatrix.clone();
+	twobytwo.translate([3*spacex,0]);
+	this.botRight.shape.matrix = twobytwo;
+	
+	//this is the final step
+	this.origin.shape.updateBuffers();
+	this.rightop.shape.updateBuffers();
+	this.botLeft.shape.updateBuffers();
+	this.botRight.shape.updateBuffers();
+	
+	this.origin.render();
+	this.rightop.render();
+	this.botLeft.render();
+	this.botRight.render();
+};
+
+/**
+* This is the right L shape
+*/
+
+var rightL = function(gl, shader, canvas){
+	//the origin will be the top right block
+	this.origin = new block(gl, shader, canvas);
+	this.origin.shape.color = [ 0, 0.0, 1, 1.0];
+	//set the pieces relative to origin
+	this.omatrix = this.origin.clonematrix() ;
+		
+	//1x2 block
+	this.rightop = new block(gl, shader, canvas);
+	this.rightop.shape.color = [ 0.0, 0.0, 1, 1.0];	
+	
+	
+		
+	//2x1 block
+	this.botLeft = new block(gl, shader, canvas);
+	this.botLeft.shape.color = [ 0, 0.0, 1, 1.0];
+	//2x2 block
+	this.botRight = new block(gl, shader, canvas);
+	this.botRight.shape.color = [ 0, 0.0, 1,1.0];
+	
+};
+
+rightL.prototype.render = function(){
+	//go thorugh and render the aligned pieces	
+	var onebytwo = this.omatrix.clone();	
+	onebytwo.translate([0,spacey]);
+	this.rightop.shape.matrix = onebytwo;
+	
+	var twobyone = this.omatrix.clone();
+	twobyone.translate([spacex,0]);
+	this.botLeft.shape.matrix = twobyone;
+	
+	var twobytwo = this.omatrix.clone();
+	twobytwo.translate([2*spacex,0]);
+	this.botRight.shape.matrix = twobytwo;
+	
+	//this is the final step
+	this.origin.shape.updateBuffers();
+	this.rightop.shape.updateBuffers();
+	this.botLeft.shape.updateBuffers();
+	this.botRight.shape.updateBuffers();
+	
+	this.origin.render();
+	this.rightop.render();
+	this.botLeft.render();
+	this.botRight.render();
+};
+
+/**
+* Left L shape
+*/
+var leftL = function(gl, shader, canvas){
+	//the origin will be the top right block
+	this.origin = new block(gl, shader, canvas);
+	this.origin.shape.color = [ 1.0, .5, 0.0, 1.0];
+	//set the pieces relative to origin
+	this.omatrix = this.origin.clonematrix() ;
+		
+	//1x2 block
+	this.rightop = new block(gl, shader, canvas);
+	this.rightop.shape.color = [ 1.0, .5, 0.0, 1.0];	
+	
+	
+		
+	//2x1 block
+	this.botLeft = new block(gl, shader, canvas);
+	this.botLeft.shape.color = [ 1.0, .5, 0.0, 1.0];
+	//2x2 block
+	this.botRight = new block(gl, shader, canvas);
+	this.botRight.shape.color = [ 1.0, .5, 0.0,1.0];
+	
+};
+
+leftL.prototype.render = function(){
+	//go thorugh and render the aligned pieces	
+	var onebytwo = this.omatrix.clone();	
+	onebytwo.translate([spacex,0]);
+	this.rightop.shape.matrix = onebytwo;
+	
+	var twobyone = this.omatrix.clone();
+	twobyone.translate([2*spacex,0]);
+	this.botLeft.shape.matrix = twobyone;
+	
+	var twobytwo = this.omatrix.clone();
+	twobytwo.translate([2*spacex,spacey]);
+	this.botRight.shape.matrix = twobytwo;
+	
+	//this is the final step
+	this.origin.shape.updateBuffers();
+	this.rightop.shape.updateBuffers();
+	this.botLeft.shape.updateBuffers();
+	this.botRight.shape.updateBuffers();
+	
+	this.origin.render();
+	this.rightop.render();
+	this.botLeft.render();
+	this.botRight.render();
+};
+
+/**
+*The middle finger shape
+*/
+var upsideT = function(gl, shader, canvas){
+	//the origin will be the top right block
+	this.origin = new block(gl, shader, canvas);
+	this.origin.shape.color = [ 0.7, 0.0, 1, 1.0];
+	//set the pieces relative to origin
+	this.omatrix = this.origin.clonematrix() ;
+		
+	//1x2 block
+	this.rightop = new block(gl, shader, canvas);
+	this.rightop.shape.color = [ 0.7, 0.0, 1, 1.0];	
+	
+	
+		
+	//2x1 block
+	this.botLeft = new block(gl, shader, canvas);
+	this.botLeft.shape.color = [ 0.7, 0.0, 1, 1.0];
+	//2x2 block
+	this.botRight = new block(gl, shader, canvas);
+	this.botRight.shape.color = [ 0.7, 0.0, 1,1.0];
+	
+};
+
+upsideT.prototype.render = function(){
+	//go thorugh and render the aligned pieces	
+	this.omatrix = this.origin.clonematrix();
+	var onebytwo = this.omatrix.clone();	
+	onebytwo.translate([-spacex,0]);
+	this.rightop.shape.matrix = onebytwo;
+	
+	var twobyone = this.omatrix.clone();
+	twobyone.translate([spacex,0]);
+	this.botLeft.shape.matrix = twobyone;
+	
+	var twobytwo = this.omatrix.clone();
+	twobytwo.translate([0,spacey]);
+	this.botRight.shape.matrix = twobytwo;
+	
+	//this is the final step
+	this.origin.shape.updateBuffers();
+	this.rightop.shape.updateBuffers();
+	this.botLeft.shape.updateBuffers();
+	this.botRight.shape.updateBuffers();
+	
+	this.origin.render();
+	this.rightop.render();
+	this.botLeft.render();
+	this.botRight.render();
+};
+
+
+
+
+upsideT.prototype.transLeft = function(){
+	this.origin.translate([-spacex,0]);
+};
+
+upsideT.prototype.transRight = function(){
+	this.origin.translate([spacex,0]);
+};
+
+upsideT.prototype.transDown = function(){
+	this.origin.translate([0,-spacey]);
 }
 
-
+upsideT.prototype.transUp = function(){
+	this.origin.translate([0,spacey]);
+}
 
 
 // mat objects stuff here
@@ -218,6 +567,8 @@ var mat = function(){
 	else
 	this.array = createMatI();
 };
+
+
 
 mat.prototype.set = function(r,c,val)
 {
