@@ -72,6 +72,10 @@ Shape.prototype.inside = function(x,y){
 			y <= .15 && y >= -.15;
 }
 
+Shape.prototype.rotate = function(angle){
+	this.matrix.rotate(angle);
+};
+
 
 
 
@@ -153,7 +157,7 @@ var block = function(gl,shader, canvas){
 	
 	
 };
-
+//have not test rotattion features yet .......
 block.prototype.render = function(){
 	this.shape.updateBuffers();
 	this.shape.render();
@@ -161,6 +165,10 @@ block.prototype.render = function(){
 
 block.prototype.translate = function(translate){
 	this.shape.setTranslate(translate);
+};
+
+block.prototype.rotate = function(angle){
+	this.shape.rotate(angle);
 };
 
 block.prototype.clonematrix = function(){
@@ -550,11 +558,15 @@ upsideT.prototype.transRight = function(){
 
 upsideT.prototype.transDown = function(){
 	this.origin.translate([0,-spacey]);
-}
+};
 
 upsideT.prototype.transUp = function(){
 	this.origin.translate([0,spacey]);
-}
+};
+
+upsideT.prototype.rotateLeft = function(){
+	this.origin.rotate(90);
+};
 
 
 // mat objects stuff here
@@ -636,6 +648,25 @@ mat.prototype.translate = function(translate){
 		throw new Error("Unsupported")
 	
 };
+
+mat.prototype.rotate = function(angle){
+
+	if(!Number.isNaN(angle)){
+		var radian = Math.PI * angle;
+		var cos = Math.cos(radian);
+		var sin = Math.sin(radian);
+		
+		var m_r = new mat([
+		cos, sin, 0.0,
+		-sin, cos, 0.0,
+		0.0, 0.0, 1.0]);
+		
+		this.mult(m_r);
+	}
+	else
+		throw Error("Unsupported Type");
+};
+
 
 function createMatI(){
 	 var matrix = new Float32Array(9);
