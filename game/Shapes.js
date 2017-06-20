@@ -216,6 +216,8 @@ var squareT = function(gl, shader, canvas){
 	this.botRight = new block(gl, shader, canvas);
 	this.botRight.shape.color = [ 1, 1, 0.0,1.0];
 	
+	this.tranBegin();
+	
 };
 
 squareT.prototype.render = function(){
@@ -269,6 +271,11 @@ squareT.prototype.rotateLeft = function(){
 squareT.prototype.rotateRight = function(){
 	this.origin.rotate(90);
 	this.origin.scale([0.5, 2]);
+};
+
+squareT.prototype.tranBegin = function(){
+	//need to translate to the top but have to decide this with the acutal reatio..
+	this.origin.translate([0,1-spacey]);
 };
 /**
 * This is the left z shape

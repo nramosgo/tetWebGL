@@ -68,12 +68,14 @@ function tetris(gl, canvas, shader){
 	//var delta
 	var tampdelt = 0;
 	
+	//var droppy	= new dropper();
+	
 	//create the fisrt tetris object
 	repaint = function(timestamp){
 		//update delta
 		tampdelt = timestamp - lasttimestamp;
 		delta = delta + tampdelt;
-			var things	= new dropper();
+			
 		if(delta > 1000){
 		delta = 0;
 		//activeShape.transDown();

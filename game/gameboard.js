@@ -6,8 +6,27 @@ var board = function(gl, shader, canvas, height, width){
 	//
 };
 
-var dropper = function(){
-	var piece = Math.random();
-	console.log(piece);
+/*var dropper = function(gl, shader, canvas){
+	this.getPiece();
 	//switch()
+		switch(this.piece)
+	
 };
+
+dropper.prototype.getPiece = function(gl, shader, canvas){
+	
+	var piece = Math.random();
+	piece = Math.floor(piece*7);
+	console.log(piece+ ": random number");
+	//switch through possible pieces
+	
+	switch(piece) {
+		case 0:  //creates square
+					this.piece = new squareT(gl, shader, canvas);
+					this.translate
+					this.piece.render();
+					break;
+	}
+	
+};*/
+
