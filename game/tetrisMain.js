@@ -2,6 +2,7 @@
 
 var leave = false;
 var lasttimestamp = null;
+var delta = 0;
 var glo, canvaso, shadero;
 var sizex, sizey;
 var spacex, spacey;
@@ -36,10 +37,10 @@ function main(){
 
     // Clear <canvas>
     gl.clear(gl.COLOR_BUFFER_BIT);
-	sizex = 0.049;
-	spacex = 0.1;
-		sizey = 0.0245;
-		spacey = 0.05;
+	sizex = 0.098;
+	spacex = 0.2;
+		sizey = 0.049;
+		spacey = 0.1;
 	//goes to intro page
 	Intro(gl,canvas, shader);
 		
@@ -65,16 +66,21 @@ function tetris(gl, canvas, shader){
 	testSquare.render();
 	activeShape = testSquare;
 	//var delta
+	var tampdelt = 0;
 	
 	//create the fisrt tetris object
 	repaint = function(timestamp){
-		if(lasttimestamp !== null){
-		
-		
-		
+		//update delta
+		tampdelt = timestamp - lasttimestamp;
+		delta = delta + tampdelt;
+			var things	= new dropper();
+		if(delta > 1000){
+		delta = 0;
+		//activeShape.transDown();
+		console.log(delta + ": delta");
 		}
 		lasttimestamp = timestamp;
-		
+			//console.log(timestamp + ": time"); 1000 = 1 sec in the time stamp
 		gl.clear(gl.COLOR_BUFFER_BIT);
 		activeShape.render();
 		requestAnimationFrame(repaint);
