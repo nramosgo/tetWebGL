@@ -70,10 +70,14 @@ Shape.prototype.render = function(){
 Shape.prototype.inside = function(x,y){
 	return x <= .5 && x >= -.5 && 
 			y <= .15 && y >= -.15;
-}
+};
 
 Shape.prototype.rotate = function(angle){
 	this.matrix.rotate(angle);
+};
+
+Shape.prototype.scale = function(scale){
+	this.matrix.scale(scale);
 };
 
 
@@ -169,6 +173,10 @@ block.prototype.translate = function(translate){
 
 block.prototype.rotate = function(angle){
 	this.shape.rotate(angle);
+};
+
+block.prototype.scale =  function(scale){
+	this.shape.scale(scale);
 };
 
 block.prototype.clonematrix = function(){
@@ -565,7 +573,8 @@ upsideT.prototype.transUp = function(){
 };
 
 upsideT.prototype.rotateLeft = function(){
-	this.origin.rotate(90);
+	this.origin.rotate(-90);
+	this.origin.scale([0.5, 2]);
 };
 
 
@@ -667,6 +676,19 @@ mat.prototype.rotate = function(angle){
 		throw Error("Unsupported Type");
 };
 
+mat.prototype.scale = function(scale){
+	if(scale instanceof Array){
+		
+		var m_s = new mat([
+		scale[0], 0.0, 0.0,
+		0.0, scale[1], 0.0,
+		0.0, 0.0, 1.0]);
+		
+		this.mult(m_s);
+	}
+	else 
+		throw Error("Not an array");
+};
 
 function createMatI(){
 	 var matrix = new Float32Array(9);
