@@ -88,11 +88,12 @@ var key = ev.keyCode;
 						activeShape.transUp();
 						break;
 			case 81: //initiate rotate left on active oibject
-						console.log("rotate right");
+						console.log("rotate left");
 						activeShape.rotateLeft();
 						break;
 			case 69: //iniate roate right on active object
 						console.log("rotate left");
+						activeShape.rotateRight();
 						
 						break;
 			default: console.log("don nothing");

@@ -56,7 +56,7 @@ function tetris(gl, canvas, shader){
 	//but for know just test things
 	
 	
-		var testSquare = new upsideT(gl, shader, canvas);
+		var testSquare = new squareT(gl, shader, canvas);
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	 var testmat = new mat();
 	 var rt = testmat.clone();

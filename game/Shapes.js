@@ -161,7 +161,7 @@ var block = function(gl,shader, canvas){
 	
 	
 };
-//have not test rotattion features yet .......
+
 block.prototype.render = function(){
 	this.shape.updateBuffers();
 	this.shape.render();
@@ -219,6 +219,7 @@ var squareT = function(gl, shader, canvas){
 };
 
 squareT.prototype.render = function(){
+	this.omatrix = this.origin.clonematrix();
 	//go thorugh and render the aligned pieces	
 	var onebytwo = this.omatrix.clone();	
 	onebytwo.translate([spacex,0]);
@@ -242,7 +243,33 @@ squareT.prototype.render = function(){
 	this.rightop.render();
 	this.botLeft.render();
 	this.botRight.render();
-}
+};
+
+squareT.prototype.transLeft = function(){
+	this.origin.translate([-spacex,0]);
+};
+
+squareT.prototype.transRight = function(){
+	this.origin.translate([spacex,0]);
+};
+
+squareT.prototype.transDown = function(){
+	this.origin.translate([0,-spacey]);
+};
+
+squareT.prototype.transUp = function(){
+	this.origin.translate([0,spacey]);
+};
+
+squareT.prototype.rotateLeft = function(){
+	this.origin.rotate(-90);
+	this.origin.scale([0.5, 2]);
+};
+
+squareT.prototype.rotateRight = function(){
+	this.origin.rotate(90);
+	this.origin.scale([0.5, 2]);
+};
 /**
 * This is the left z shape
 *
@@ -270,6 +297,7 @@ var leftZ = function(gl, shader, canvas){
 };
 
 leftZ.prototype.render = function(){
+	this.omatrix = this.origin.clonematrix();
 	//go thorugh and render the aligned pieces	
 	var onebytwo = this.omatrix.clone();	
 	onebytwo.translate([spacex,0]);
@@ -293,7 +321,34 @@ leftZ.prototype.render = function(){
 	this.rightop.render();
 	this.botLeft.render();
 	this.botMid.render();
-}
+};
+
+leftZ.prototype.transLeft = function(){
+	this.origin.translate([-spacex,0]);
+};
+
+leftZ.prototype.transRight = function(){
+	this.origin.translate([spacex,0]);
+};
+
+leftZ.prototype.transDown = function(){
+	this.origin.translate([0,-spacey]);
+};
+
+leftZ.prototype.transUp = function(){
+	this.origin.translate([0,spacey]);
+};
+
+leftZ.prototype.rotateLeft = function(){
+	this.origin.rotate(-90);
+	this.origin.scale([0.5, 2]);
+};
+
+leftZ.prototype.rotateRight = function(){
+	this.origin.rotate(90);
+	this.origin.scale([0.5, 2]);
+};
+
 /**
 * This the rightZ
 *
@@ -322,6 +377,7 @@ var rightZ = function(gl, shader, canvas){
 };
 
 rightZ.prototype.render = function(){
+	this.omatrix = this.origin.clonematrix();
 	//go thorugh and render the aligned pieces	
 	var onebytwo = this.omatrix.clone();	
 	onebytwo.translate([-spacex,0]);
@@ -345,6 +401,32 @@ rightZ.prototype.render = function(){
 	this.rightop.render();
 	this.botLeft.render();
 	this.botRight.render();
+};
+
+rightZ.prototype.transLeft = function(){
+	this.origin.translate([-spacex,0]);
+};
+
+rightZ.prototype.transRight = function(){
+	this.origin.translate([spacex,0]);
+};
+
+rightZ.prototype.transDown = function(){
+	this.origin.translate([0,-spacey]);
+};
+
+rightZ.prototype.transUp = function(){
+	this.origin.translate([0,spacey]);
+};
+
+rightZ.prototype.rotateLeft = function(){
+	this.origin.rotate(-90);
+	this.origin.scale([0.5, 2]);
+};
+
+rightZ.prototype.rotateRight = function(){
+	this.origin.rotate(90);
+	this.origin.scale([0.5, 2]);
 };
 
 /**
@@ -373,6 +455,8 @@ var line = function(gl, shader, canvas){
 };
 
 line.prototype.render = function(){
+	
+	this.omatrix = this.origin.clonematrix();
 	//go thorugh and render the aligned pieces	
 	var onebytwo = this.omatrix.clone();	
 	onebytwo.translate([spacex,0]);
@@ -396,6 +480,32 @@ line.prototype.render = function(){
 	this.rightop.render();
 	this.botLeft.render();
 	this.botRight.render();
+};
+
+line.prototype.transLeft = function(){
+	this.origin.translate([-spacex,0]);
+};
+
+line.prototype.transRight = function(){
+	this.origin.translate([spacex,0]);
+};
+
+line.prototype.transDown = function(){
+	this.origin.translate([0,-spacey]);
+};
+
+line.prototype.transUp = function(){
+	this.origin.translate([0,spacey]);
+};
+
+line.prototype.rotateLeft = function(){
+	this.origin.rotate(-90);
+	this.origin.scale([0.5, 2]);
+};
+
+line.prototype.rotateRight = function(){
+	this.origin.rotate(90);
+	this.origin.scale([0.5, 2]);
 };
 
 /**
@@ -425,6 +535,8 @@ var rightL = function(gl, shader, canvas){
 };
 
 rightL.prototype.render = function(){
+	
+	this.omatrix = this.origin.clonematrix();
 	//go thorugh and render the aligned pieces	
 	var onebytwo = this.omatrix.clone();	
 	onebytwo.translate([0,spacey]);
@@ -448,6 +560,32 @@ rightL.prototype.render = function(){
 	this.rightop.render();
 	this.botLeft.render();
 	this.botRight.render();
+};
+
+rightL.prototype.transLeft = function(){
+	this.origin.translate([-spacex,0]);
+};
+
+rightL.prototype.transRight = function(){
+	this.origin.translate([spacex,0]);
+};
+
+rightL.prototype.transDown = function(){
+	this.origin.translate([0,-spacey]);
+};
+
+rightL.prototype.transUp = function(){
+	this.origin.translate([0,spacey]);
+};
+
+rightL.prototype.rotateLeft = function(){
+	this.origin.rotate(-90);
+	this.origin.scale([0.5, 2]);
+};
+
+rightL.prototype.rotateRight = function(){
+	this.origin.rotate(90);
+	this.origin.scale([0.5, 2]);
 };
 
 /**
@@ -477,6 +615,8 @@ var leftL = function(gl, shader, canvas){
 
 leftL.prototype.render = function(){
 	//go thorugh and render the aligned pieces	
+	this.omatrix = this.origin.clonematrix();
+	
 	var onebytwo = this.omatrix.clone();	
 	onebytwo.translate([spacex,0]);
 	this.rightop.shape.matrix = onebytwo;
@@ -499,6 +639,32 @@ leftL.prototype.render = function(){
 	this.rightop.render();
 	this.botLeft.render();
 	this.botRight.render();
+};
+
+leftL.prototype.transLeft = function(){
+	this.origin.translate([-spacex,0]);
+};
+
+leftL.prototype.transRight = function(){
+	this.origin.translate([spacex,0]);
+};
+
+leftL.prototype.transDown = function(){
+	this.origin.translate([0,-spacey]);
+};
+
+leftL.prototype.transUp = function(){
+	this.origin.translate([0,spacey]);
+};
+
+leftL.prototype.rotateLeft = function(){
+	this.origin.rotate(-90);
+	this.origin.scale([0.5, 2]);
+};
+
+leftL.prototype.rotateRight = function(){
+	this.origin.rotate(90);
+	this.origin.scale([0.5, 2]);
 };
 
 /**
@@ -529,6 +695,8 @@ var upsideT = function(gl, shader, canvas){
 upsideT.prototype.render = function(){
 	//go thorugh and render the aligned pieces	
 	this.omatrix = this.origin.clonematrix();
+	
+	
 	var onebytwo = this.omatrix.clone();	
 	onebytwo.translate([-spacex,0]);
 	this.rightop.shape.matrix = onebytwo;
@@ -574,6 +742,11 @@ upsideT.prototype.transUp = function(){
 
 upsideT.prototype.rotateLeft = function(){
 	this.origin.rotate(-90);
+	this.origin.scale([0.5, 2]);
+};
+
+upsideT.prototype.rotateRight = function(){
+	this.origin.rotate(90);
 	this.origin.scale([0.5, 2]);
 };
 
@@ -664,7 +837,7 @@ mat.prototype.rotate = function(angle){
 		var radian = (Math.PI * angle)/180;
 		var cos = Math.cos(radian);
 		var sin = Math.sin(radian);
-		console.log(cos+ ": " + sin);
+		//console.log(cos+ ": " + sin);
 		var m_r = new mat([
 		cos, -sin, 0.0,
 		sin, cos, 0.0,
