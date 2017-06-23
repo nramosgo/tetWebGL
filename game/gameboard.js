@@ -1,32 +1,67 @@
+var activeShapeNum = null;
 var board = function(gl, shader, canvas, height, width){
 	
-	
+	this.gl = gl;
+	this.shader = shader;
+	this.canvas =  canvas;
 	//need to figure out dimensions
-		this.array = new Array(width, height);
-	//
+		this.size = new Array(width/11, height/21);
+	//create dropper
+		
 };
 
-/*var dropper = function(gl, shader, canvas){
-	this.getPiece();
-	//switch()
-		switch(this.piece)
+board.prototype.updatePieceNum = function(){
 	
+	this.pieceNum = activeShapeNum;
+	
+}
+
+board.prototype.tick = function(){
+	if(activeShape == null){
+		
+		this.activePiece = dropper(this.gl ,this.shader, this.canvas);
+	}
 };
 
-dropper.prototype.getPiece = function(gl, shader, canvas){
+function dropper(gl, shader, canvas){
 	
 	var piece = Math.random();
 	piece = Math.floor(piece*7);
+	activeShapeNum = piece;
+	var tet;
 	console.log(piece+ ": random number");
 	//switch through possible pieces
 	
 	switch(piece) {
 		case 0:  //creates square
-					this.piece = new squareT(gl, shader, canvas);
-					this.translate
-					this.piece.render();
+					tet = new squareT(gl, shader, canvas);
 					break;
+		case 1: //creates lefttZ
+					tet = new leftZ(gl, shader, canvas);
+					break;
+		case 2: //creates rightZ
+					tet = new rightZ(gl, shader, canvas);
+					break;
+		case 3://creates line
+					tet = new line(gl, shader, canvas);
+					break;
+		case 4:// creates rgihtL
+					tet = new rightL(gl, shader, canvas);
+					break;
+		case 5:// creates leftL
+					tet = new leftL(gl, shader, canvas);
+					break;
+		case 6://creates upsideT 
+					tet = new upsideT(gl, shader, canvas);
+					break;
+		default: console.log("lmao this shouldnt happen");
+					return;
+					
 	}
 	
-};*/
+	activeShape = tet;
+			
+	return tet;		
+				
+};
 

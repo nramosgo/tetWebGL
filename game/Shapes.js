@@ -299,7 +299,7 @@ var leftZ = function(gl, shader, canvas){
 	
 	//2x2 block
 	this.botMid = new block(gl, shader, canvas);
-	
+	this.tranBegin();
 	
 };
 
@@ -356,6 +356,11 @@ leftZ.prototype.rotateRight = function(){
 	this.origin.scale([0.5, 2]);
 };
 
+leftZ.prototype.tranBegin = function(){
+	//need to translate to the top but have to decide this with the acutal reatio..
+	this.origin.translate([0,1-spacey]);
+};
+
 /**
 * This the rightZ
 *
@@ -381,6 +386,7 @@ var rightZ = function(gl, shader, canvas){
 	this.botRight = new block(gl, shader, canvas);
 	this.botRight.shape.color = [ 0.0, 1, 0.0,1.0];
 	
+	this.tranBegin();
 };
 
 rightZ.prototype.render = function(){
@@ -436,6 +442,11 @@ rightZ.prototype.rotateRight = function(){
 	this.origin.scale([0.5, 2]);
 };
 
+rightZ.prototype.tranBegin = function(){
+	//need to translate to the top but have to decide this with the acutal reatio..
+	this.origin.translate([0,1-spacey]);
+};
+
 /**
 * Line piece
 */
@@ -459,6 +470,7 @@ var line = function(gl, shader, canvas){
 	this.botRight = new block(gl, shader, canvas);
 	this.botRight.shape.color = [ 0, .5, 1,1.0];
 	
+	this.tranBegin();
 };
 
 line.prototype.render = function(){
@@ -515,6 +527,11 @@ line.prototype.rotateRight = function(){
 	this.origin.scale([0.5, 2]);
 };
 
+line.prototype.tranBegin = function(){
+	//need to translate to the top but have to decide this with the acutal reatio..
+	this.origin.translate([0,1-spacey]);
+};
+
 /**
 * This is the right L shape
 */
@@ -539,6 +556,7 @@ var rightL = function(gl, shader, canvas){
 	this.botRight = new block(gl, shader, canvas);
 	this.botRight.shape.color = [ 0, 0.0, 1,1.0];
 	
+	this.tranBegin();
 };
 
 rightL.prototype.render = function(){
@@ -595,6 +613,11 @@ rightL.prototype.rotateRight = function(){
 	this.origin.scale([0.5, 2]);
 };
 
+rightL.prototype.tranBegin = function(){
+	//need to translate to the top but have to decide this with the acutal reatio..
+	this.origin.translate([0,1-spacey]);
+};
+
 /**
 * Left L shape
 */
@@ -617,6 +640,8 @@ var leftL = function(gl, shader, canvas){
 	//2x2 block
 	this.botRight = new block(gl, shader, canvas);
 	this.botRight.shape.color = [ 1.0, .5, 0.0,1.0];
+	
+	this.tranBegin();
 	
 };
 
@@ -674,6 +699,10 @@ leftL.prototype.rotateRight = function(){
 	this.origin.scale([0.5, 2]);
 };
 
+leftL.prototype.tranBegin = function(){
+	//need to translate to the top but have to decide this with the acutal reatio..
+	this.origin.translate([0,1-spacey]);
+};
 /**
 *The middle finger shape
 */
@@ -697,6 +726,7 @@ var upsideT = function(gl, shader, canvas){
 	this.botRight = new block(gl, shader, canvas);
 	this.botRight.shape.color = [ 0.7, 0.0, 1,1.0];
 	
+	this.tranBegin();
 };
 
 upsideT.prototype.render = function(){
@@ -755,6 +785,11 @@ upsideT.prototype.rotateLeft = function(){
 upsideT.prototype.rotateRight = function(){
 	this.origin.rotate(90);
 	this.origin.scale([0.5, 2]);
+};
+
+upsideT.prototype.tranBegin = function(){
+	//need to translate to the top but have to decide this with the acutal reatio..
+	this.origin.translate([0,1-spacey]);
 };
 
 

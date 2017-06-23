@@ -8,6 +8,7 @@ var sizex, sizey;
 var spacex, spacey;
 var interval;
 var activeShape;
+var activeShapeNum;
 
 var gameboard;
 function main(){
@@ -57,18 +58,19 @@ function tetris(gl, canvas, shader){
 	//but for know just test things
 	
 	
-		var testSquare = new squareT(gl, shader, canvas);
+		
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	 var testmat = new mat();
 	 var rt = testmat.clone();
 	 console.log(rt);
 	
-	testSquare.render();
-	activeShape = testSquare;
+
+	
 	//var delta
 	var tampdelt = 0;
 	
-	//var droppy	= new dropper();
+	var gameboard = new board(gl , shader, canvas, 0,0);
+	gameboard.tick();
 	
 	//create the fisrt tetris object
 	repaint = function(timestamp){
@@ -78,7 +80,7 @@ function tetris(gl, canvas, shader){
 			
 		if(delta > 1000){
 		delta = 0;
-		//activeShape.transDown();
+		gameboard.tick();
 		console.log(delta + ": delta");
 		}
 		lasttimestamp = timestamp;
