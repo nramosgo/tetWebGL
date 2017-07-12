@@ -151,6 +151,7 @@ Shape.prototype.clonematrix = function(){
 *Create the invidividual tetris block
 */
 var block = function(gl,shader, canvas){
+	
 	this.shape = new Shape(gl, shader, canvas);
 	this.shape.vertices.push([-(sizex),-(sizey)]);
 	this.shape.vertices.push([sizex,-(sizey)]);

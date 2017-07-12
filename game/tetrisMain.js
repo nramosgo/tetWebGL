@@ -38,10 +38,11 @@ function main(){
 
     // Clear <canvas>
     gl.clear(gl.COLOR_BUFFER_BIT);
-	sizex = 0.098;
-	spacex = 0.2;
-		sizey = 0.049;
-		spacey = 0.1;
+	spacex = (2.0/11);
+	sizex = (spacex/2) - 0.003;
+		spacey = (2.0/21);
+		sizey = (spacey/2) - 0.0015;
+		
 	//goes to intro page
 	Intro(gl,canvas, shader);
 		
@@ -71,6 +72,7 @@ function tetris(gl, canvas, shader){
 	
 	var gameboard = new board(gl , shader, canvas, 0,0);
 	gameboard.tick();
+	gl.clear(gl.COLOR_BUFFER_BIT);
 	
 	//create the fisrt tetris object
 	repaint = function(timestamp){
@@ -85,7 +87,7 @@ function tetris(gl, canvas, shader){
 		}
 		lasttimestamp = timestamp;
 			//console.log(timestamp + ": time"); 1000 = 1 sec in the time stamp
-		gl.clear(gl.COLOR_BUFFER_BIT);
+		//gl.clear(gl.COLOR_BUFFER_BIT);
 		activeShape.render();
 		requestAnimationFrame(repaint);
 	};
