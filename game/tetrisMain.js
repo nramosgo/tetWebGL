@@ -8,7 +8,8 @@ var sizex, sizey;
 var spacex, spacey;
 var interval;
 var activeShape;
-var activeShapeNum;
+var gameboard; 
+
 
 var gameboard;
 function main(){
@@ -70,7 +71,7 @@ function tetris(gl, canvas, shader){
 	//var delta
 	var tampdelt = 0;
 	
-	var gameboard = new board(gl , shader, canvas, 0,0);
+	gameboard = new board(gl , shader, canvas, 0,0);
 	gameboard.tick();
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	
@@ -87,7 +88,7 @@ function tetris(gl, canvas, shader){
 		}
 		lasttimestamp = timestamp;
 			//console.log(timestamp + ": time"); 1000 = 1 sec in the time stamp
-		//gl.clear(gl.COLOR_BUFFER_BIT);
+		gl.clear(gl.COLOR_BUFFER_BIT);
 		activeShape.render();
 		requestAnimationFrame(repaint);
 	};

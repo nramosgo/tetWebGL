@@ -73,7 +73,8 @@ var key = ev.keyCode;
 	switch(key){
 			case 65: //initiate shift rigth on active object
 						console.log("shift left");
-						activeShape.transLeft();
+						
+						activeShape.transLeft()
 						break;
 			case 68: //initiate shift left on active object
 						console.log("shift rigth");
@@ -81,18 +82,24 @@ var key = ev.keyCode;
 						break;
 			case 83: //initiate shift down on active object	
 						console.log("shift down");
-						activeShape.transDown();
+						if(gameboard.possible(83)){
+							gameboard.updateBoard(83);
+							activeShape.transDown()
+							};
 						break;
-			case 87: //initate shift up on active object
+			/*case 87: //initate shift up on active object
 						console.log("shift up");
 						activeShape.transUp();
-						break;
+						break;*/
 			case 81: //initiate rotate left on active oibject
 						console.log("rotate left");
-						activeShape.rotateLeft();
+						if(gameboard.possible(81)){
+							gameboard.updateBoard(81);
+							activeShape.rotateLeft();
+							}
 						break;
 			case 69: //iniate roate right on active object
-						console.log("rotate left");
+						console.log("rotate right");
 						activeShape.rotateRight();
 						
 						break;
