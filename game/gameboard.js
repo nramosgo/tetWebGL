@@ -47,6 +47,9 @@ board.prototype.tick = function(){
 	
 	if(this.ifFloor()){
 			//console.log("The piece is on the floor");
+			if(this.ifLost()){
+				return true;
+			}
 			this.lock();
 			activeShape = null;
 			this.activePiece = this.dropper(this.gl ,this.shader, this.canvas, this.size);
@@ -57,7 +60,7 @@ board.prototype.tick = function(){
 		activeShape.transDown();
 		this.updateBoard(83);
 	}
-	
+	return false;
 	
 	};
 	
@@ -387,7 +390,7 @@ board.prototype.updateBoard = function(direction){
 							//update the activePiece array
 							for(var x = 0;x<4;x++){
 								var temp = activeShapeArr[x][1]-1;
-								console.log(temp);
+								//console.log(temp);
 								activeShapeArr[x][1] = temp;
 							}
 					
@@ -421,7 +424,7 @@ board.prototype.updateBoard = function(direction){
 							//finally put the piece back on the board
 							for(var x = 0; x < 4; x++){
 								this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = activeShapeNum;
-								console.log(activeShapeArr[x][0]+ "::::"+ activeShapeArr);
+								//console.log(activeShapeArr[x][0]+ "::::"+ activeShapeArr);
 							}	
 						
 						
@@ -449,7 +452,7 @@ board.prototype.updateBoard = function(direction){
 							//finally put the piece back on the board
 							for(var x = 0; x < 4; x++){
 								this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = activeShapeNum;
-								console.log(activeShapeArr[x][0]+ "::::"+ activeShapeArr);
+								//console.log(activeShapeArr[x][0]+ "::::"+ activeShapeArr);
 							}	
 						break;
 						
@@ -461,7 +464,7 @@ board.prototype.updateBoard = function(direction){
 						//update the pice array
 						for(var x = 0;x<4;x++){
 								var temp = activeShapeArr[x][0]-1;
-								console.log(temp);
+								//console.log(temp);
 								activeShapeArr[x][0] = temp;
 							}
 						//put the pice back in
@@ -478,7 +481,7 @@ board.prototype.updateBoard = function(direction){
 						//update the pice array
 						for(var x = 0;x<4;x++){
 								var temp = activeShapeArr[x][0]+1;
-								console.log(temp);
+								//console.log(temp);
 								activeShapeArr[x][0] = temp;
 							}
 						//put the pice back in
@@ -518,7 +521,7 @@ visit.push([0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0]);
 		//console.log("visit LEngth: "+ visit.length + ". Space: " +space[0]);
 		//console.log(this.size);
 		if(this.size[space[0]][space[1]] > 0){
-		console.log(visited + "Visited array");
+		//console.log(visited + "Visited array");
 		this.lineStack.push(space);
 												//add to list and put in visited
 		//checks to see if it shoudl include above it
@@ -539,7 +542,7 @@ visit.push([0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0]);
 		    }
 		//checks to see if it should go right
 		var right = [space[0]+1, space[1]] ;
-			if(right[0]<10){
+			if(right[0]<11){
 				if(!has(visited,right)&& !has(visited,right) && (this.size[right[0]][right[1]] > 0)){ visit.push(right); }
 		    }
 		}
@@ -556,6 +559,13 @@ visit.push([0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0]);
 	
 	
 	this.lineStack = []; 
+};
+
+board.prototype.ifLost = function(){
+	for(var x =0; x<11;x++){
+	if(this.size[x][18]>0){ return true;}
+	}
+	return false;
 };
 //if array 1 has array 2 .....
 function has(ma, coord){

@@ -87,7 +87,9 @@ function tetris(gl, canvas, shader){
 		
 		if(delta > 1000){
 		delta = 0;
-		gameboard.tick();
+		if(gameboard.tick()){
+			return;
+		}
 		console.log(delta + ": delta");
 		}
 		lasttimestamp = timestamp;
