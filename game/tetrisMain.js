@@ -92,9 +92,10 @@ function tetris(gl, canvas, shader){
 		}
 		lasttimestamp = timestamp;
 			//console.log(timestamp + ": time"); 1000 = 1 sec in the time stamp
-			
+		
 			
 		gl.clear(gl.COLOR_BUFFER_BIT);
+		gameboard.renderList();
 		activeShape.render();
 		requestAnimationFrame(repaint);
 	};

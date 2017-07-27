@@ -511,20 +511,38 @@ var visited = [];
 var visit = [];
 visit.push([0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0]);
 	//breadht fisrt search
-	while(this.visit.length > 0){
+	while(visit.length > 0){
 		//check the space in question
-		space = visit.pop();
-		
-		if(this.size[space[0]][space[1]] > 0){ this.lineStack.push(space);
-												visited.push(space) ;}//add to list and put in visited
+		var space = visit.pop();
+		visited.push(space) ;
+		console.log("visit LEngth: "+ visit.length + ". Space: " +space[0]);
+		console.log(this.size);
+		if(this.size[space[0]][space[1]] > 0){
+		console.log(visited + "Visited array");
+		this.lineStack.push(space);
+												//add to list and put in visited
+		//checks to see if it shoudl include above it
 		var above = [space[0],space[1]+1];
-			if(visited.includes(above) == false && visit.includes(above)== false){ visit.push(above); }
+			if(above[1]<23){
+			if( !has(visited,above) && !has(visit,above) && (this.size[above[0]][above[1]] > 0)){ visit.push(above); }
+		//checks to see if it should include below
+			}
+		
 		var below = [space[0],space[1]-1];
-			if(visited.includes(below) == false && visit.includes(below)== false){ visit.push(below); }
+			if(below[1]>-1){
+				if( !has(visited,below) && !has(visit,below) && (this.size[below[0]][below[1]] > 0)){ visit.push(below); }
+			}
+		//checks to see if should go left
 		var left = [space[0]-1,space[1]];
-			if(visited.includes(left) == false && visit.includes(left)== false){ visit.push(left); }
+			if(left[0]>-1){
+				if( !has(visited,left) && !has(visited,left) && (this.size[left[0]][left[1]] > 0)){ visit.push(left); }
+		    }
+		//checks to see if it should go right
 		var right = [space[0]+1, space[1]] ;
-		    if(visited.includes(right) == false && visit.includes(right)== false){ visit.push(right); }
+			if(right[0]<10){
+				if(!has(visited,right)&& !has(visited,right) && (this.size[right[0]][right[1]] > 0)){ visit.push(right); }
+		    }
+		}
 	}
 
 	//end of breadth first search
@@ -533,11 +551,24 @@ visit.push([0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0]);
 		obj = new block(this.gl, this.shader, this.canvas);
 		obj.translate([-1+(spacex/2)+xy[0]*(spacex), -1+(spacey)+xy[1]*spacey]);//needs to be updated
 		obj.render();
+	console.log("Hullllo>")
 	}
-	this.lineStack = null; 
+	
+	
+	this.lineStack = []; 
 };
-
-
+//if array 1 has array 2 .....
+function has(ma, coord){
+	var len = ma.length;
+	for(var x =0; x<len; x++){
+		if(ma[x][0] == coord[0]){
+			if(ma[x][1] == coord[1])
+				return true;
+		}
+		else;
+	}
+	return false;
+};
 
 function createActiveShapeArr(){
 	
