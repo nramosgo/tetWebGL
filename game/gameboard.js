@@ -2,7 +2,7 @@ var activeShapeNum = null;
 var debug = true;
 var activeShapeArr = null;
 var board = function(gl, shader, canvas, height, width){
-	
+	this.lineStack = [];
 	this.gl = gl;
 	this.shader = shader;
 	this.canvas =  canvas;
@@ -44,18 +44,20 @@ board.prototype.tick = function(){
 	}
 
 	//so need to check if activeShape can move down
-	if(debug == true){
+	
 	if(this.ifFloor()){
 			//console.log("The piece is on the floor");
-		
+			this.lock();
+			activeShape = null;
+			this.activePiece = this.dropper(this.gl ,this.shader, this.canvas, this.size);
 	}
 	
 	else{
 		console.log(" The Piece is not on the floor ");
-		//activeShape.transDown();
-		//this.updateBoard(83);
+		activeShape.transDown();
+		this.updateBoard(83);
 	}
-	}
+	
 	
 	};
 	
@@ -493,6 +495,49 @@ board.prototype.updateBoard = function(direction){
 	
 	
 };
+board.prototype.lock = function(){
+	temp = activeShapeNum*-1;
+	for(var x = 0; x < 4; x++){
+					this.size[activeShapeArr[x][0]][activeShapeArr[x][1]] = temp;					
+							}
+	//need to signal to add a new piece
+	
+};
+
+
+board.prototype.renderList = function(){
+
+var visited = [];
+var visit = [];
+visit.push([0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0]);
+	//breadht fisrt search
+	while(this.visit.length > 0){
+		//check the space in question
+		space = visit.pop();
+		
+		if(this.size[space[0]][space[1]] > 0){ this.lineStack.push(space);
+												visited.push(space) ;}//add to list and put in visited
+		var above = [space[0],space[1]+1];
+			if(visited.includes(above) == false && visit.includes(above)== false){ visit.push(above); }
+		var below = [space[0],space[1]-1];
+			if(visited.includes(below) == false && visit.includes(below)== false){ visit.push(below); }
+		var left = [space[0]-1,space[1]];
+			if(visited.includes(left) == false && visit.includes(left)== false){ visit.push(left); }
+		var right = [space[0]+1, space[1]] ;
+		    if(visited.includes(right) == false && visit.includes(right)== false){ visit.push(right); }
+	}
+
+	//end of breadth first search
+	while(this.lineStack.length > 0){
+		var xy = this.lineStack.pop();
+		obj = new block(this.gl, this.shader, this.canvas);
+		obj.translate([-1+(spacex/2)+xy[0]*(spacex), -1+(spacey)+xy[1]*spacey]);//needs to be updated
+		obj.render();
+	}
+	this.lineStack = null; 
+};
+
+
 
 function createActiveShapeArr(){
 	
