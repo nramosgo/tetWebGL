@@ -51,6 +51,7 @@ board.prototype.tick = function(){
 				return true;
 			}
 			this.lock();
+			this.delLines();
 			activeShape = null;
 			this.activePiece = this.dropper(this.gl ,this.shader, this.canvas, this.size);
 	}
@@ -577,21 +578,37 @@ function has(ma, coord){
 	return false;
 };
 
-/*board.prototype.delLines = function(){
-	for(var y=0;y>18;y++){
+board.prototype.delLines = function(){
+	for(var y=0;y<18;y++){
 			//no wgo by row
 			var  done = true;
-			for(var x=0; x>11; x++){
-				if(this.size[x][y]<0){done = false;
+			for(var x=0; x<11; x++){
+				console.log("X,Y: "+x+","+y+"  size: "+ this.size[x][y]);
+				if(this.size[x][y] <= 0){done = false;
+										
 										break;}
 			}
 	
 		if(done){
-			for(var x=0; x>11; x++){ this.;}
+			
+			for(var x=0; x<11; x++){ this.size[x][y] = 0;}
+			//now translate all the blocks down
+			var level = y+1;
+			for(;level<17;level++){
+				for(var x=0; x<11;x++){
+					//translate the block down
+					this.size[x][level-1] = this.size[x][level];
+				}
+				
+			}
+			
+			for(var x=0;x<11;x++){ this.size[x][17];}
+		
+		
 		}
 	
 	}
-};*/
+}; 
 
 function createActiveShapeArr(){
 	

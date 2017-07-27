@@ -56,7 +56,7 @@ function main(){
 
 
 function tetris(gl, canvas, shader){
-	
+
 	//but for know just test things
 	
 	
@@ -84,7 +84,7 @@ function tetris(gl, canvas, shader){
 		//update delta
 		tampdelt = timestamp - lasttimestamp;
 		delta = delta + tampdelt;
-		
+
 		if(delta > 1000){
 		delta = 0;
 		if(gameboard.tick()){
