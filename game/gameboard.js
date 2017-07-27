@@ -1,4 +1,5 @@
 var activeShapeNum = null;
+var debug = true;
 var activeShapeArr = null;
 var board = function(gl, shader, canvas, height, width){
 	
@@ -7,10 +8,10 @@ var board = function(gl, shader, canvas, height, width){
 	this.canvas =  canvas;
 	//need to figure out dimensions
 		
-		var tempsize = new Array(10);
+		var tempsize = new Array(11);
 		for( var i=0; i <11; i++ ){
-			tempsize[i] =  new Array(21);  
-				for(var j=0; j<21; j++){
+			tempsize[i] =  new Array(24);  
+				for(var j=0; j<24; j++){
 					tempsize[i][j] = 0;
 				}
 		}
@@ -43,6 +44,7 @@ board.prototype.tick = function(){
 	}
 
 	//so need to check if activeShape can move down
+	if(debug == true){
 	if(this.ifFloor()){
 			//console.log("The piece is on the floor");
 		
@@ -53,7 +55,7 @@ board.prototype.tick = function(){
 		activeShape.transDown();
 		this.updateBoard(83);
 	}
-	
+	}
 	
 	};
 	
@@ -62,9 +64,9 @@ board.prototype.tick = function(){
 // by defualt set the origin piece of all shapes to [0][y]
 board.prototype.dropper = function(gl, shader, canvas){
 	
-	//var piece = Math.random();
-	//piece = Math.floor(piece*7);
-	var piece = 0;//just for test purposes
+	var piece = Math.random();
+	piece = Math.floor(piece*7);
+	//var piece = 6;//just for test purposes
 	var tet;
 	console.log(piece+ ": random number");
 	//switch through possible pieces
@@ -73,22 +75,18 @@ board.prototype.dropper = function(gl, shader, canvas){
 		case 0:  //creates square
 					tet = new squareT(gl, shader, canvas);
 					//set the active piece array
-					activeShapeArr[0][0] = 6;
+					activeShapeArr[0][0] = 5;
 					activeShapeArr[0][1] = 19;
-					activeShapeArr[1][0] = 6;
+					activeShapeArr[1][0] = 5;
 					activeShapeArr[1][1] = 18;
-					activeShapeArr[2][0] = 7;
+					activeShapeArr[2][0] = 6;
 					activeShapeArr[2][1] = 18;
-					activeShapeArr[3][0] = 7;
+					activeShapeArr[3][0] = 6;
 					activeShapeArr[3][1] = 19;
 					//put the activeShapeArr in the board
 					
 					for(var x = 0; x < 4; x++){
-						
-							
 						this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = -1;//im retarded
-						
-						
 					}
 					
 					//set active shape num
@@ -97,21 +95,131 @@ board.prototype.dropper = function(gl, shader, canvas){
 					break;
 		case 1: //creates lefttZ
 					tet = new leftZ(gl, shader, canvas);
+					//set the active piece array
+					activeShapeArr[0][0] = 5;
+					activeShapeArr[0][1] = 19;
+					activeShapeArr[1][0] = 6;
+					activeShapeArr[1][1] = 19;
+					activeShapeArr[2][0] = 5;
+					activeShapeArr[2][1] = 18;
+					activeShapeArr[3][0] = 4;
+					activeShapeArr[3][1] = 18;
+					//put the activeShapeArr in the board
+					
+					for(var x = 0; x < 4; x++){
+						this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = -2;//im retarded
+					}
+					
+					//set active shape num
+					activeShapeNum = -2;
+					
 					break;
 		case 2: //creates rightZ
 					tet = new rightZ(gl, shader, canvas);
+					
+					//set the active piece array
+					activeShapeArr[0][0] = 5;
+					activeShapeArr[0][1] = 19;
+					activeShapeArr[1][0] = 4;
+					activeShapeArr[1][1] = 19;
+					activeShapeArr[2][0] = 5;
+					activeShapeArr[2][1] = 18;
+					activeShapeArr[3][0] = 6;
+					activeShapeArr[3][1] = 18;
+					//put the activeShapeArr in the board
+					
+					for(var x = 0; x < 4; x++){
+						this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = -3;//im retarded
+					}
+					
+					//set active shape num
+					activeShapeNum = -3;
 					break;
 		case 3://creates line
 					tet = new line(gl, shader, canvas);
+					
+					//set the active piece array
+					activeShapeArr[0][0] = 5;
+					activeShapeArr[0][1] = 19;
+					activeShapeArr[1][0] = 6;
+					activeShapeArr[1][1] = 19;
+					activeShapeArr[2][0] = 7;
+					activeShapeArr[2][1] = 19;
+					activeShapeArr[3][0] = 8;
+					activeShapeArr[3][1] = 18;
+					//put the activeShapeArr in the board
+					
+					for(var x = 0; x < 4; x++){
+						this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = -4;//im retarded
+					}
+					
+					//set active shape num
+					activeShapeNum = -4;
+					
 					break;
 		case 4:// creates rgihtL
 					tet = new rightL(gl, shader, canvas);
+					//set the active piece array
+					activeShapeArr[0][0] = 5;
+					activeShapeArr[0][1] = 19;
+					activeShapeArr[1][0] = 5;
+					activeShapeArr[1][1] = 20;
+					activeShapeArr[2][0] = 6;
+					activeShapeArr[2][1] = 19;
+					activeShapeArr[3][0] = 7;
+					activeShapeArr[3][1] = 19;
+					//put the activeShapeArr in the board
+					
+					for(var x = 0; x < 4; x++){
+						this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = -5;//im retarded
+					}
+					
+					//set active shape num
+					activeShapeNum = -5;
+					
 					break;
 		case 5:// creates leftL
 					tet = new leftL(gl, shader, canvas);
+					//set the active piece array
+					activeShapeArr[0][0] = 5;
+					activeShapeArr[0][1] = 19;
+					activeShapeArr[1][0] = 6;
+					activeShapeArr[1][1] = 19;
+					activeShapeArr[2][0] = 7;
+					activeShapeArr[2][1] = 19;
+					activeShapeArr[3][0] = 7;
+					activeShapeArr[3][1] = 20;
+					//put the activeShapeArr in the board
+					
+					for(var x = 0; x < 4; x++){
+						this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = -6;//im retarded
+					}
+					
+					//set active shape num
+					activeShapeNum = -6;
+					
 					break;
 		case 6://creates upsideT 
 					tet = new upsideT(gl, shader, canvas);
+					//set the active piece array
+					activeShapeArr[0][0] = 5;
+					activeShapeArr[0][1] = 19;
+					activeShapeArr[1][0] = 5;
+					activeShapeArr[1][1] = 20;
+					activeShapeArr[2][0] = 4;
+					activeShapeArr[2][1] = 19;
+					activeShapeArr[3][0] = 6;
+					activeShapeArr[3][1] = 19;
+					//put the activeShapeArr in the board
+					
+					for(var x = 0; x < 4; x++){
+						this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = -7;//im retarded
+					}
+					
+					//set active shape num
+					activeShapeNum = -7;
+					
+					
 					break;
 		default: console.log("lmao this shouldnt happen");
 					return;
@@ -126,18 +234,34 @@ board.prototype.dropper = function(gl, shader, canvas){
 
 board.prototype.possible = function(direction){
 	//if its going piece is trying to go down
-	if(direction == 83){
+	
+	switch(direction){
 		
-		if(this.ifFloor()){return false};
-		 return true;
-		
+	case 83:	
+			if(this.ifFloor()){return false};
+			return true;
+			break;
+	
+	case 81:
+			if(this.ifRotateLeft()){return true};
+			return false;
+			break;
+	case 69:
+			if(this.ifRotateRight()){return true};
+			return false;
+			break;
+			
+	case 65:
+			if(this.ifLeftSide()){return false};
+			return true;
+			break;
+	case 68:
+			if(this.ifRightSide()){return false};
+			return true;
+			break;
+	default: console.log("This shouldnt happen");	
+			
 	}
-	else if(direction == 81){
-		if(this.ifRotateLeft()){return true};
-		return false;
-	}
-	else;
-		
 	
 	return true;
 };
@@ -162,6 +286,38 @@ board.prototype.ifFloor = function(){
 	return false;
 };
 
+board.prototype.ifLeftSide = function(){
+	for(var x =0;x<4;x++){
+		
+		i = activeShapeArr[x][0]-1 ;
+		j = activeShapeArr[x][1];
+		if(i==-1){  return true;}
+		
+		var testobj = this.size[i][j];
+		
+		if(testobj > 0 ){
+			return true;
+		}
+	}
+	return false;
+};
+
+board.prototype.ifRightSide = function(){
+	for(var x =0;x<4;x++){
+		
+		i = activeShapeArr[x][0]+1 ;
+		j = activeShapeArr[x][1];
+		if(i==11){  return true;}
+		
+		var testobj = this.size[i][j];
+		
+		if(testobj > 0 ){
+			return true;
+		}
+	}
+	return false;
+};
+
 /**
 Checks to see if it possible to rotate by -90 degrees
 
@@ -169,7 +325,7 @@ Checks to see if it possible to rotate by -90 degrees
 board.prototype.ifRotateRight = function(){
 	var a;
 	var b;
-	activeShapeArr[0][0] = xo; activeShapeArr[0][1] = yo;
+	var xo = activeShapeArr[0][0]; var yo = activeShapeArr[0][1];
 	
 	for(var i = 1; i<4;i++){
 		a = activeShapeArr[i][0];
@@ -215,10 +371,11 @@ return true;
 	
 };
 
+
 board.prototype.updateBoard = function(direction){
 	
 	switch(direction){
-						case 83:			
+				case 83:			
 							//so clear the current piece in the board
 							
 							for(var x = 0; x < 4; x++){
@@ -238,7 +395,7 @@ board.prototype.updateBoard = function(direction){
 							}	
 						break;
 						
-						case 81: //rotate left
+				case 81: //rotate left
 							//so clear the current piece in the board
 							
 							for(var x = 0; x < 4; x++){
@@ -268,11 +425,70 @@ board.prototype.updateBoard = function(direction){
 						
 						break;
 						
-						case 69:
-						
+				case 69:
+								for(var x = 0; x < 4; x++){
+								this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = 0;
+							}
+							//update the active piece array
+							var a;
+							var b;
+							var xo = activeShapeArr[0][0]; var yo = activeShapeArr[0][1];
+	
+							for(var i = 1; i<4;i++){
+							a = activeShapeArr[i][0];
+							b = activeShapeArr[i][1];
+		
+							ao = a -xo; bo = b-yo;
+							a = bo + xo; b = -1*ao + yo;
+							activeShapeArr[i][0] = a;
+							activeShapeArr[i][1] = b;
+							}
+							
+							//finally put the piece back on the board
+							for(var x = 0; x < 4; x++){
+								this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = activeShapeNum;
+								console.log(activeShapeArr[x][0]+ "::::"+ activeShapeArr);
+							}	
 						break;
 						
-						default: console.log("This shouldnt happen....");
+				case 65:
+						//clear the piece
+						for(var x = 0; x < 4; x++){
+								this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = 0;
+							}
+						//update the pice array
+						for(var x = 0;x<4;x++){
+								var temp = activeShapeArr[x][0]-1;
+								console.log(temp);
+								activeShapeArr[x][0] = temp;
+							}
+						//put the pice back in
+						for(var x = 0; x < 4; x++){
+								this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = activeShapeNum;
+							}	
+					break;
+					
+				case 68:
+					//clear the piece
+						for(var x = 0; x < 4; x++){
+								this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = 0;
+							}
+						//update the pice array
+						for(var x = 0;x<4;x++){
+								var temp = activeShapeArr[x][0]+1;
+								console.log(temp);
+								activeShapeArr[x][0] = temp;
+							}
+						//put the pice back in
+						for(var x = 0; x < 4; x++){
+								this.size[activeShapeArr[x][0]][activeShapeArr[x][1]]   = activeShapeNum;
+							}	
+					break;
+						
+				
+				default: console.log("This shouldnt happen....");
+				
+						
 	}
 	
 	

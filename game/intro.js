@@ -72,20 +72,25 @@ function handleKey(ev, gl, canvas){
 var key = ev.keyCode;
 	switch(key){
 			case 65: //initiate shift rigth on active object
-						console.log("shift left");
-						
-						activeShape.transLeft()
+						if(gameboard.possible(65)){
+						console.log("shift left")
+						gameboard.updateBoard(65);
+						activeShape.transLeft();
+						}
 						break;
 			case 68: //initiate shift left on active object
+						if(gameboard.possible(68)){
 						console.log("shift rigth");
+						gameboard.updateBoard(68);
 						activeShape.transRight();
+						}
 						break;
 			case 83: //initiate shift down on active object	
 						console.log("shift down");
 						if(gameboard.possible(83)){
 							gameboard.updateBoard(83);
-							activeShape.transDown()
-							};
+							activeShape.transDown();
+							}
 						break;
 			/*case 87: //initate shift up on active object
 						console.log("shift up");
@@ -99,9 +104,11 @@ var key = ev.keyCode;
 							}
 						break;
 			case 69: //iniate roate right on active object
+						if(gameboard.possible(69)){
 						console.log("rotate right");
+						gameboard.updateBoard(69);
 						activeShape.rotateRight();
-						
+						}
 						break;
 			default: console.log("don nothing");
 	

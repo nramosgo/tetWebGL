@@ -52,7 +52,7 @@ function main(){
 
 
 
-}
+};
 
 
 function tetris(gl, canvas, shader){
@@ -73,6 +73,9 @@ function tetris(gl, canvas, shader){
 	
 	gameboard = new board(gl , shader, canvas, 0,0);
 	gameboard.tick();
+	
+	//for debugging 
+	//activeShape = new upsideT(gl, shader, canvas);
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	
 	//create the fisrt tetris object
@@ -80,7 +83,7 @@ function tetris(gl, canvas, shader){
 		//update delta
 		tampdelt = timestamp - lasttimestamp;
 		delta = delta + tampdelt;
-			
+		
 		if(delta > 1000){
 		delta = 0;
 		gameboard.tick();
@@ -88,6 +91,7 @@ function tetris(gl, canvas, shader){
 		}
 		lasttimestamp = timestamp;
 			//console.log(timestamp + ": time"); 1000 = 1 sec in the time stamp
+			
 		gl.clear(gl.COLOR_BUFFER_BIT);
 		activeShape.render();
 		requestAnimationFrame(repaint);
@@ -97,7 +101,7 @@ function tetris(gl, canvas, shader){
 	
 	
 	
-}
+};
 /**
  * [Copied from UNCC  ITCS 3120 Final Project]
  * Converts 1D or 2D array of Number's 'v' into a 1D Float32Array.
@@ -131,4 +135,4 @@ function flatten(v)
     }
 
     return floats;
-}
+};
