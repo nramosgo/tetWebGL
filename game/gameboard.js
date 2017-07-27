@@ -509,7 +509,7 @@ board.prototype.lock = function(){
 
 
 board.prototype.renderList = function(){
-
+var obj;
 var visited = [];
 var visit = [];
 visit.push([0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0]);
@@ -522,7 +522,10 @@ visit.push([0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0]);
 		//console.log(this.size);
 		if(this.size[space[0]][space[1]] > 0){
 		//console.log(visited + "Visited array");
-		this.lineStack.push(space);
+		
+		obj = new block(this.gl, this.shader, this.canvas);
+		obj.translate([-1+(spacex/2)+space[0]*(spacex), -1+(spacey)+space[1]*spacey]);//needs to be updated
+		obj.render();
 												//add to list and put in visited
 		//checks to see if it shoudl include above it
 		var above = [space[0],space[1]+1];
@@ -549,16 +552,10 @@ visit.push([0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0]);
 	}
 
 	//end of breadth first search
-	while(this.lineStack.length > 0){
-		var xy = this.lineStack.pop();
-		obj = new block(this.gl, this.shader, this.canvas);
-		obj.translate([-1+(spacex/2)+xy[0]*(spacex), -1+(spacey)+xy[1]*spacey]);//needs to be updated
-		obj.render();
-	//console.log("Hullllo>")
-	}
 	
 	
-	this.lineStack = []; 
+	
+
 };
 
 board.prototype.ifLost = function(){
@@ -579,6 +576,22 @@ function has(ma, coord){
 	}
 	return false;
 };
+
+/*board.prototype.delLines = function(){
+	for(var y=0;y>18;y++){
+			//no wgo by row
+			var  done = true;
+			for(var x=0; x>11; x++){
+				if(this.size[x][y]<0){done = false;
+										break;}
+			}
+	
+		if(done){
+			for(var x=0; x>11; x++){ this.;}
+		}
+	
+	}
+};*/
 
 function createActiveShapeArr(){
 	
