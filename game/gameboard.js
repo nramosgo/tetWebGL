@@ -515,8 +515,8 @@ visit.push([0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0]);
 		//check the space in question
 		var space = visit.pop();
 		visited.push(space) ;
-		console.log("visit LEngth: "+ visit.length + ". Space: " +space[0]);
-		console.log(this.size);
+		//console.log("visit LEngth: "+ visit.length + ". Space: " +space[0]);
+		//console.log(this.size);
 		if(this.size[space[0]][space[1]] > 0){
 		console.log(visited + "Visited array");
 		this.lineStack.push(space);
@@ -551,7 +551,7 @@ visit.push([0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0],[10,0]);
 		obj = new block(this.gl, this.shader, this.canvas);
 		obj.translate([-1+(spacex/2)+xy[0]*(spacex), -1+(spacey)+xy[1]*spacey]);//needs to be updated
 		obj.render();
-	console.log("Hullllo>")
+	//console.log("Hullllo>")
 	}
 	
 	

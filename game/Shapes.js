@@ -10,7 +10,7 @@ var Shape = function(gl,shader,canvas)
 {
 	this.glp = gl;
 	this.shader = shader;
-	console.log("hello");
+	//console.log("hello");
 	this.color = new Float32Array(4);
 	this.color = [1.0,0.0,0.0,1.0];
 	this.vertices = new Array();
