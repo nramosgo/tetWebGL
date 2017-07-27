@@ -52,8 +52,8 @@ board.prototype.tick = function(){
 	
 	else{
 		console.log(" The Piece is not on the floor ");
-		activeShape.transDown();
-		this.updateBoard(83);
+		//activeShape.transDown();
+		//this.updateBoard(83);
 	}
 	}
 	
@@ -64,9 +64,9 @@ board.prototype.tick = function(){
 // by defualt set the origin piece of all shapes to [0][y]
 board.prototype.dropper = function(gl, shader, canvas){
 	
-	var piece = Math.random();
-	piece = Math.floor(piece*7);
-	//var piece = 6;//just for test purposes
+	//var piece = Math.random();
+	//piece = Math.floor(piece*7);
+	var piece = 3;//just for test purposes
 	var tet;
 	console.log(piece+ ": random number");
 	//switch through possible pieces
@@ -146,7 +146,7 @@ board.prototype.dropper = function(gl, shader, canvas){
 					activeShapeArr[2][0] = 7;
 					activeShapeArr[2][1] = 19;
 					activeShapeArr[3][0] = 8;
-					activeShapeArr[3][1] = 18;
+					activeShapeArr[3][1] = 19;
 					//put the activeShapeArr in the board
 					
 					for(var x = 0; x < 4; x++){
