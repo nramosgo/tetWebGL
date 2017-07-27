@@ -66,9 +66,9 @@ board.prototype.tick = function(){
 // by defualt set the origin piece of all shapes to [0][y]
 board.prototype.dropper = function(gl, shader, canvas){
 	
-	//var piece = Math.random();
-	//piece = Math.floor(piece*7);
-	var piece = 3;//just for test purposes
+	var piece = Math.random();
+	piece = Math.floor(piece*7);
+	//var piece = 3;//just for test purposes
 	var tet;
 	console.log(piece+ ": random number");
 	//switch through possible pieces
