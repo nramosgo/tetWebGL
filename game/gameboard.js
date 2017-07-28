@@ -51,7 +51,7 @@ board.prototype.tick = function(){
 				return true;
 			}
 			this.lock();
-			while(this.delLines());
+			this.delLines();
 			activeShape = null;
 			this.activePiece = this.dropper(this.gl ,this.shader, this.canvas, this.size);
 	}
@@ -595,26 +595,26 @@ board.prototype.delLines = function(){
 			for(var x=0; x<11; x++){ this.size[x][y] = 0;}
 			//now translate all the blocks down
 			var level = y+1;
-			/*for(;level<17;level++){
+			for(;level<17;level++){
 				for(var x=0; x<11;x++){
 					//translate the block down?// ned to create a way to move it all the way down to next block
 					this.size[x][level-1] = this.size[x][level];
 				}
 				
-			}*/
+			}/*
 			for(var x=0;x<11;x++){ 
 				for(var lev =level;lev<17;lev++){
 					
 					if(this.size[x][lev]>0){//if there is a block there
 					   var ylev = lev;
-						while(this.size[x][ylev-1]==0 && ylev-1>-1){this.size[x][ylev-1]=this.size[x][ylev];
+						while(this.size[x][ylev-1]==0 && (ylev-1)>-1){this.size[x][ylev-1]=this.size[x][ylev];
 																	this.size[x][ylev] = 0;
 																	ylev = ylev -1; }	
 					}
 				}
 		
 		
-		}
+		}*/
 		
 	}}
 	return didsomething;
